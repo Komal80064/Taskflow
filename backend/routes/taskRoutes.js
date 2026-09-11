@@ -6,7 +6,7 @@ const {
   createTask,
   updateTask,
   deleteTask,
-} = require("../controllers/taskController");
+} = require("../controllers/taskcontroller");
 
 const protect = require("../middleware/authMiddleware");
 
