@@ -9,27 +9,31 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY,
 );
 
-// Get today's date in YYYY-MM-DD format
-const getTodayDate = () => {
-  const today = new Date();
 
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+// Get tomorrow's date in YYYY-MM-DD format
+const getTomorrowDate = () => {
+  const tomorrow = new Date();
+
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
+  const day = String(tomorrow.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 };
 
+
 // Send reminder notifications
 const checkTaskReminders = async () => {
   try {
-    const today = getTodayDate();
+    const tomorrow = getTomorrowDate();
 
-    console.log(`🔍 Checking tasks due on ${today}...`);
+    console.log(`🔍 Checking tasks due on ${tomorrow}...`);
 
-    // Find pending tasks due today
+    // Find pending tasks due tomorrow
     const tasks = await Task.find({
-      dueDate: today,
+      dueDate: tomorrow,
       status: "Pending",
       reminderSent: false,
     });
@@ -39,7 +43,7 @@ const checkTaskReminders = async () => {
       return;
     }
 
-    console.log(`📋 Found ${tasks.length} task(s) due today.`);
+    console.log(`📋 Found ${tasks.length} task(s) due tomorrow.`);
 
     for (const task of tasks) {
       try {
@@ -74,7 +78,9 @@ const checkTaskReminders = async () => {
         task.reminderSent = true;
         await task.save();
 
-        console.log(`✅ Reminder sent for task: ${task.title}`);
+        console.log(
+          `✅ Reminder sent for task: ${task.title}`,
+        );
       } catch (error) {
         console.error(
           `❌ Failed to send reminder for task: ${task.title}`,
@@ -100,6 +106,7 @@ const checkTaskReminders = async () => {
   }
 };
 
+
 // Start scheduler
 const startTaskReminder = () => {
   console.log("⏰ Task reminder scheduler started.");
@@ -110,6 +117,7 @@ const startTaskReminder = () => {
   // Check every 1 minute
   setInterval(checkTaskReminders, 60 * 1000);
 };
+
 
 module.exports = {
   startTaskReminder,
