@@ -9,31 +9,27 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY,
 );
 
+// Get today's date in YYYY-MM-DD format
+const getTodayDate = () => {
+  const today = new Date();
 
-// Get tomorrow's date in YYYY-MM-DD format
-const getTomorrowDate = () => {
-  const tomorrow = new Date();
-
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const year = tomorrow.getFullYear();
-  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
-  const day = String(tomorrow.getDate()).padStart(2, "0");
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 };
 
-
 // Send reminder notifications
 const checkTaskReminders = async () => {
   try {
-    const tomorrow = getTomorrowDate();
+    const today = getTodayDate();
 
-    console.log(`🔍 Checking tasks due on ${tomorrow}...`);
+    console.log(`🔍 Checking tasks due on ${today}...`);
 
-    // Find pending tasks due tomorrow
+    // Find pending tasks due today
     const tasks = await Task.find({
-      dueDate: tomorrow,
+      dueDate: today,
       status: "Pending",
       reminderSent: false,
     });
@@ -43,7 +39,7 @@ const checkTaskReminders = async () => {
       return;
     }
 
-    console.log(`📋 Found ${tasks.length} task(s) due tomorrow.`);
+    console.log(`📋 Found ${tasks.length} task(s) due today.`);
 
     for (const task of tasks) {
       try {
@@ -62,7 +58,7 @@ const checkTaskReminders = async () => {
 
         const payload = JSON.stringify({
           title: "TaskFlow Reminder 🔔",
-          body: `"${task.title}" is due tomorrow.`,
+          body: `"${task.title}" is due today.`,
           url: "/",
         });
 
@@ -78,9 +74,7 @@ const checkTaskReminders = async () => {
         task.reminderSent = true;
         await task.save();
 
-        console.log(
-          `✅ Reminder sent for task: ${task.title}`,
-        );
+        console.log(`✅ Reminder sent for task: ${task.title}`);
       } catch (error) {
         console.error(
           `❌ Failed to send reminder for task: ${task.title}`,
@@ -106,7 +100,6 @@ const checkTaskReminders = async () => {
   }
 };
 
-
 // Start scheduler
 const startTaskReminder = () => {
   console.log("⏰ Task reminder scheduler started.");
@@ -117,7 +110,6 @@ const startTaskReminder = () => {
   // Check every 1 minute
   setInterval(checkTaskReminders, 60 * 1000);
 };
-
 
 module.exports = {
   startTaskReminder,
