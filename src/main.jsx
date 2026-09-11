@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import "./app.css";
+import "./App.css";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 const savedTheme = localStorage.getItem("taskflow_theme") || "light";
