@@ -104,7 +104,7 @@ function Settings() {
       setNotifications(true);
 
       new Notification("TaskFlow Notifications Enabled 🔔", {
-        body: "You will receive a reminder 1 day before your tasks are due.",
+        body: "Get reminders for your tasks due today"
       });
     } catch (error) {
       console.error("❌ Push subscription failed:", error);

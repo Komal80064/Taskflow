@@ -43,7 +43,7 @@ const checkTaskReminders = async () => {
       return;
     }
 
-    console.log(`📋 Found ${tasks.length} task(s) due tomorrow.`);
+    console.log(`📋 Found ${tasks.length} task(s) due today.`);
 
     for (const task of tasks) {
       try {
