@@ -196,7 +196,7 @@ function Settings() {
         <div className="settings-row">
           <div>
             <h2>Notifications</h2>
-            <p>Get a reminder 1 day before your tasks are due.</p>
+            <p>Get reminders for your tasks due today</p>
           </div>
 
           <label className="switch">
