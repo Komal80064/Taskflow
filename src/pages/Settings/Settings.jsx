@@ -207,7 +207,6 @@ function Settings() {
             />
 
             <span className="slider"></span>
-            <button onClick={sendTestNotification}>Test Notification</button>
           </label>
         </div>
       </section>

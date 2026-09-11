@@ -484,7 +484,7 @@
 
   .task-card {
     align-items: flex-start;
-    gap: 10px;
+    gap: 5px;
     background: var(--accent-light);
   }
 
