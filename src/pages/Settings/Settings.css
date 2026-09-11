@@ -1,0 +1,189 @@
+.settings-page {
+  padding: 30px;
+  max-width: 900px;
+}
+
+.settings-header {
+  margin-bottom: 25px;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: var(--text-primary);
+}
+
+.settings-header p {
+  margin-top: 6px;
+  color: var(--text-secondary);
+}
+
+.settings-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.settings-card-header {
+  margin-bottom: 20px;
+}
+
+.settings-card h2 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--text-primary);
+}
+
+.settings-card p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Theme */
+
+.theme-options {
+  display: flex;
+  gap: 15px;
+}
+
+.theme-option {
+  flex: 1;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+.theme-option:hover {
+  border-color: var(--accent-color);
+}
+
+.theme-option.selected {
+  border: 2px solid var(--accent-color);
+  background: var(--accent-light);
+}
+
+.theme-icon {
+  font-size: 24px;
+}
+
+/* Accent */
+
+.accent-options {
+  display: flex;
+  gap: 15px;
+}
+
+.accent-option {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+}
+
+.accent-option.selected {
+  border-color: var(--text-primary);
+}
+
+.accent-option.blue {
+  background: #3b82f6;
+}
+
+.accent-option.purple {
+  background: #8b5cf6;
+}
+
+.accent-option.green {
+  background: #10b981;
+}
+
+.accent-option.orange {
+  background: #f97316;
+}
+
+.accent-option.pink {
+  background: #ec4899;
+}
+
+/* Notification */
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Toggle */
+
+.switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+  background: var(--accent-color);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .settings-page {
+    padding: 20px;
+  }
+
+  .theme-options {
+    flex-direction: column;
+  }
+
+  .theme-option {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .settings-row {
+    gap: 20px;
+  }
+}

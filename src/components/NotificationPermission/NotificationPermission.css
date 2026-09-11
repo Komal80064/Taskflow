@@ -1,0 +1,13 @@
+.notification-permission-btn {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.notification-permission-btn:hover {
+  opacity: 0.9;
+}

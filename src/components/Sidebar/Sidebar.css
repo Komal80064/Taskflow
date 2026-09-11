@@ -1,0 +1,359 @@
+/* =================================
+   SIDEBAR
+================================= */
+
+.sidebar {
+  box-sizing: border-box;
+  width: 250px;
+  height: 100vh;
+  background: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* =================================
+   LOGO
+================================= */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  margin-bottom: 40px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-logo span {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* =================================
+   NAVIGATION
+================================= */
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  padding: 0 12px;
+  margin: 0 0 8px;
+}
+
+.settings-title {
+  margin-top: 28px;
+}
+
+/* =================================
+   NAVIGATION BUTTONS
+================================= */
+
+.nav-item {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-item:hover {
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background: var(--accent-light);
+  color: var(--accent-color);
+}
+
+.nav-icon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 17px;
+}
+
+/* =================================
+   BOTTOM / LOGOUT
+================================= */
+
+.sidebar-bottom {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+.logout-button {
+  width: 100%;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.logout-button:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* =================================
+   MOBILE HEADER
+================================= */
+
+.mobile-header {
+  display: none;
+}
+
+.menu-button {
+  border: none;
+  background: transparent;
+
+  color: var(--text-primary);
+
+  cursor: pointer;
+  font-size: 24px;
+  padding: 4px;
+}
+
+.mobile-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+/* =================================
+   CLOSE SIDEBAR
+================================= */
+
+.close-sidebar-btn {
+  display: none;
+}
+
+/* =================================
+   OVERLAY
+================================= */
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 768px) {
+  .mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+
+    z-index: 1000;
+  }
+
+  .menu-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .menu-button:hover {
+    background: var(--border-color);
+  }
+
+  .mobile-logo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: var(--text-primary);
+  }
+
+  .mobile-logo .logo-icon {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .sidebar {
+    width: 270px;
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    padding: 24px 16px;
+
+    transform: translateX(-100%);
+
+    transition:
+      transform 0.3s ease,
+      background-color 0.25s ease;
+
+    box-shadow: none;
+
+    z-index: 1100;
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .close-sidebar-btn {
+    width: 36px;
+    height: 36px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-seconary);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .close-sidebar-btn:hover {
+    background: var(--input-bg);
+    color: var(--text-primary);
+  }
+
+  .sidebar-overlay {
+    display: block;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 1050;
+  }
+
+  .nav-item {
+    height: 46px;
+  }
+
+  .sidebar-bottom {
+    padding-bottom: 10px;
+  }
+}
+
+/* =================================
+   DESKTOP
+================================= */
+
+@media (min-width: 769px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .close-sidebar-btn {
+    display: none;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+}
