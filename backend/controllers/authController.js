@@ -11,6 +11,7 @@ const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
+
 const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -37,14 +38,29 @@ const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({
-      message: "User registered successfully",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
+    // Create JWT after successful signup
+    const token = jwt.sign(
+      {
+        userId: user._id,
       },
-    });
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      },
+    );
+
+    // Store JWT in httpOnly cookie
+    res
+      .cookie("token", token, cookieOptions)
+      .status(201)
+      .json({
+        message: "Account created successfully",
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+      });
   } catch (error) {
     console.error("Signup error:", error);
 
@@ -53,6 +69,8 @@ const signup = async (req, res) => {
     });
   }
 };
+
+
 
 const login = async (req, res) => {
   try {

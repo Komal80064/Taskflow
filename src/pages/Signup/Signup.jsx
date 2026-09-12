@@ -9,24 +9,20 @@ const Signup = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
-    setSuccess("");
     setLoading(true);
 
     try {
       await signup(name, email, password);
 
-      setSuccess("Account created successfully. Please login.");
-
-      setName("");
-      setEmail("");
-      setPassword("");
+      // No navigation needed.
+      // AuthContext sets the user,
+      // which automatically shows the dashboard.
     } catch (error) {
       setError(
         error.response?.data?.message ||
@@ -48,6 +44,7 @@ const Signup = ({ onLogin }) => {
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
             <label>Name</label>
+
             <input
               type="text"
               placeholder="Enter your name"
@@ -59,6 +56,7 @@ const Signup = ({ onLogin }) => {
 
           <div className="auth-field">
             <label>Email</label>
+
             <input
               type="email"
               placeholder="Enter your email"
@@ -70,6 +68,7 @@ const Signup = ({ onLogin }) => {
 
           <div className="auth-field">
             <label>Password</label>
+
             <input
               type="password"
               placeholder="Create a password"
@@ -80,10 +79,10 @@ const Signup = ({ onLogin }) => {
             />
           </div>
 
-          {error && <p className="auth-error">{error}</p>}
-
-          {success && (
-            <p className="auth-success">{success}</p>
+          {error && (
+            <p className="auth-error">
+              {error}
+            </p>
           )}
 
           <button
@@ -91,7 +90,9 @@ const Signup = ({ onLogin }) => {
             className="auth-submit-btn"
             disabled={loading}
           >
-            {loading ? "Creating account..." : "Sign up"}
+            {loading
+              ? "Creating account..."
+              : "Sign up"}
           </button>
         </form>
 

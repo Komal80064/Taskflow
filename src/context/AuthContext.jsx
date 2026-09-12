@@ -46,6 +46,14 @@ export const AuthProvider = ({ children }) => {
       password,
     });
 
+    // User is automatically logged in after signup
+    localStorage.setItem(
+      "taskflow_user",
+      JSON.stringify(data.user)
+    );
+
+    setUser(data.user);
+
     return data;
   };
 
@@ -77,3 +85,4 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+
