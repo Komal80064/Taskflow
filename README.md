@@ -299,7 +299,7 @@ Make sure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_TASKFLOW_GITHUB_REPOSITORY_URL
+git clone https://github.com/Komal80064/Taskflow
 ```
 
 ### 2. Navigate to the project
