@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">TaskFlow</title>
+  <rect width="64" height="64" rx="16" fill="#09090b"/>
+  <defs>
+    <linearGradient id="tag" x1="14" y1="14" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#d946ef"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 16h24a9 9 0 0 1 9 9v14l-15 9-18-10V16Z" fill="url(#tag)"/>
+  <circle cx="39" cy="25" r="3.5" fill="#09090b"/>
+  <path d="M20 37h15M20 43h10" stroke="#09090b" stroke-width="3" stroke-linecap="round"/>
+</svg>
