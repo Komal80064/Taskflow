@@ -10,6 +10,7 @@ import Analytics from "./pages/Analytics/Analytics";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import { useAuth } from "./context/AuthContext";
+import LandingPage from "./pages/LandingPage/LandingPage";
 import {
   getProjects,
   createProject,
@@ -27,7 +28,29 @@ import Settings from "./pages/Settings/Settings";
 const App = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
   const { user, isAuthenticated } = useAuth();
-  const [authPage, setAuthPage] = useState("login");
+  const [publicPage, setPublicPage] = useState("landing");
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+
+      if (path === "/") {
+        setPublicPage("landing");
+      } else if (path === "/login") {
+        setPublicPage("login");
+      } else if (path === "/signup") {
+        setPublicPage("signup");
+      }
+    };
+
+    handlePopState();
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   // Load tasks from MongoDB
   const [tasks, setTasks] = useState([]);
@@ -174,12 +197,42 @@ const App = () => {
   };
 
   if (!isAuthenticated) {
-    return authPage === "login" ? (
-      <Login onSignup={() => setAuthPage("signup")} />
-    ) : (
-      <Signup onLogin={() => setAuthPage("login")} />
+    if (publicPage === "landing") {
+      return (
+        <LandingPage
+          onLogin={() => {
+            window.history.pushState({}, "", "/login");
+            setPublicPage("login");
+          }}
+          onSignup={() => {
+            window.history.pushState({}, "", "/signup");
+            setPublicPage("signup");
+          }}
+        />
+      );
+    }
+
+    if (publicPage === "login") {
+      return (
+        <Login
+          onSignup={() => {
+            window.history.pushState({}, "", "/signup");
+            setPublicPage("signup");
+          }}
+        />
+      );
+    }
+
+    return (
+      <Signup
+        onLogin={() => {
+          window.history.pushState({}, "", "/login");
+          setPublicPage("login");
+        }}
+      />
     );
   }
+
   return (
     <div className="app">
       <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
@@ -189,7 +242,7 @@ const App = () => {
           <Dashboard
             tasks={tasks}
             projects={projects}
-            user = {user}
+            user={user}
             onAddTask={handleAddTask}
             onToggleTask={handleToggleTask}
             onDeleteTask={handleDeleteTask}
@@ -246,7 +299,6 @@ const App = () => {
 
         {currentPage === "settings" && <Settings />}
       </main>
-
     </div>
   );
 };
